@@ -2,24 +2,34 @@ const mongoose = require("mongoose")
 const { type } = require("os")
 
 const StudentSchema = new mongoose.Schema({
-    Sid : {
+    sid : {
         type: String,
         required : true,
+        unique: true,
     },
     name : {
         type: String,
         required : true,
     },
+   email:{
+    type:String,
+    required : true
+   },
+   age : {
+    type:Number,
+    required : true
+   },
     image : {
-        type: file,
-        required : true,
-    },
-    Sid : {
         type: String,
-        required : true,
+       
     },
-    Sid : {
+    status: {
         type: String,
-        required : true,
-    },
+        enum: ["Active", "Inactive"],
+        default: "Active",
+        required: true
+    }
 })
+
+module.exports = mongoose.model("Student", StudentSchema)
+

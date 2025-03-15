@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 
 const AdminRouter = require("./routers/AdminRoutes")
+const StudentRouter = require("./routers/StudentRouter")
 
 dotenv.config()
 const PORT = process.env.PORT
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 //add router here
 app.use("/api/adminauth", AdminRouter)
+app.use("/api/students",StudentRouter)
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);

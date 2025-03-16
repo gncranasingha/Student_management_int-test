@@ -1,19 +1,16 @@
-// routes/StudentRoutes.js
 const express = require("express");
-const { createStudent,  getStudent, getStudentById, updateStudent, deleteStudent } = require("../controllers/StudentController");
-const verifyToken = require("../middleware/authmiddleware");
+const { createStudent, getStudent, getStudentById, updateStudent, deleteStudent } = require("../controllers/StudentController");
+const upload = require("../middleware/uploadimagemiddleware");
 
 const router = express.Router();
 
-router.use(verifyToken);
+
+router.post("/", upload.single("image"), createStudent);
 
 
-router.post("/", createStudent);
 router.get("/", getStudent);
-router.get("/:id", getStudentById);
-router.put("/:id", updateStudent);
-router.delete("/:id", deleteStudent);
-
+router.get("/:sid", getStudentById);
+router.put("/:sid", upload.single("image"), updateStudent);
+router.delete("/:sid", deleteStudent);
 
 module.exports = router;
-

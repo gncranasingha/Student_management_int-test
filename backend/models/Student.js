@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const { type } = require("os")
+
 
 const StudentSchema = new mongoose.Schema({
     sid : {

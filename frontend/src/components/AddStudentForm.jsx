@@ -11,6 +11,8 @@ const AddStudentForm = ({ fetchStudents, editingStudent, clearEditing }) => {
     image: null,
   });
 
+  
+
   useEffect(() => {
     if (editingStudent) {
       // editing student details
@@ -68,10 +70,22 @@ const AddStudentForm = ({ fetchStudents, editingStudent, clearEditing }) => {
           headers: { "Content-Type": "multipart/form-data" },
         });
         alert("Student added successfully!");
+        setFormData({
+          sid: "",
+          name: "",
+          email: "",
+          age: "",
+          status: "Active",
+          image:"",
+        });
       }
       clearEditing(); 
       fetchStudents(); 
-    } catch (error) {
+
+      
+
+    }
+     catch (error) {
       console.error("Error submitting form:", error.response?.data || error.message);
       alert(`Failed to submit: ${error.response?.data?.message || "Unknown error"}`);
     }
@@ -79,65 +93,65 @@ const AddStudentForm = ({ fetchStudents, editingStudent, clearEditing }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        name="sid"
-        placeholder="Student ID"
-        value={formData.sid}
-        onChange={handleChange}
-        required
-        readOnly={!!editingStudent} // Disable editing  SID
-        className="w-full p-2 border rounded"
-      />
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-        className="w-full p-2 border rounded"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-        className="w-full p-2 border rounded"
-      />
-      <input
-        type="number"
-        name="age"
-        placeholder="Age"
-        value={formData.age}
-        onChange={handleChange}
-        required
-        className="w-full p-2 border rounded"
-      />
-      <select
-        name="status"
-        value={formData.status}
-        onChange={handleChange}
-        className="w-full p-2 border rounded"
-      >
-        <option value="Active">Active</option>
-        <option value="Inactive">Inactive</option>
-      </select>
-      <input
-        type="file"
-        name="image"
-        onChange={handleImageChange}
-        className="w-full p-2 border rounded"
-      />
-      <button
-        type="submit"
-        className="w-full bg-gradient-to-r from-blue-900 to-green-300 text-white p-2 rounded hover:bg-green-600"
-      >
-        {editingStudent ? "Update Student" : "Add Student"}
-      </button>
-    </form>
+  <input
+    type="text"
+    name="sid"
+    placeholder="Student ID"
+    value={formData.sid}
+    onChange={handleChange}
+    required
+    readOnly={!!editingStudent}
+    className="w-full p-2 border rounded"
+  />
+  <input
+    type="text"
+    name="name"
+    placeholder="Name"
+    value={formData.name}
+    onChange={handleChange}
+    required
+    className="w-full p-2 border rounded"
+  />
+  <input
+    type="email"
+    name="email"
+    placeholder="Email"
+    value={formData.email}
+    onChange={handleChange}
+    required
+    className="w-full p-2 border rounded"
+  />
+  <input
+    type="number"
+    name="age"
+    placeholder="Age"
+    value={formData.age}
+    onChange={handleChange}
+    required
+    className="w-full p-2 border rounded"
+  />
+  <select
+    name="status"
+    value={formData.status}
+    onChange={handleChange}
+    className="w-full p-2 border rounded"
+  >
+    <option value="Active">Active</option>
+    <option value="Inactive">Inactive</option>
+  </select>
+  <input
+    type="file"
+    name="image"
+    onChange={handleImageChange}
+    className="w-full p-2 border rounded"
+  />
+  <button
+    type="submit"
+    className="w-full bg-gradient-to-r from-blue-900 to-green-300 text-white p-2 rounded hover:bg-green-600"
+  >
+    {editingStudent ? "Update Student" : "Add Student"}
+  </button>
+</form>
   );
 };
 

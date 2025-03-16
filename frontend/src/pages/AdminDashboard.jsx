@@ -21,27 +21,27 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Left Column*/}
-      <div className="w-1/3 p-4 bg-white shadow-md">
-        <h2 className="text-xl font-bold mb-4">{editingStudent ? "Edit Student" : "Add Student"}</h2>
-        <AddStudentForm
-          fetchStudents={fetchStudents}
-          editingStudent={editingStudent} 
-          clearEditing={() => setEditingStudent(null)}
-        />
-      </div>
+    <div className="flex flex-col md:flex-row h-screen bg-gray-100">
+  {/* Left Column */}
+  <div className="w-full md:w-1/3 p-4 bg-white shadow-md">
+    <h2 className="text-xl font-bold mb-4">{editingStudent ? "Edit Student" : "Add Student"}</h2>
+    <AddStudentForm
+      fetchStudents={fetchStudents}
+      editingStudent={editingStudent} 
+      clearEditing={() => setEditingStudent(null)}
+    />
+  </div>
 
-      {/* Right Column */}
-      <div className="w-2/3 p-4 bg-white shadow-md">
-        <h2 className="text-xl font-bold mb-4">Student List</h2>
-        <StudentTable
-          students={students}
-          fetchStudents={fetchStudents}
-          setEditingStudent={setEditingStudent}
-        />
-      </div>
-    </div>
+  {/* Right Column */}
+  <div className="w-full md:w-2/3 p-4 bg-white shadow-md">
+    <h2 className="text-xl font-bold mb-4">Student List</h2>
+    <StudentTable
+      students={students}
+      fetchStudents={fetchStudents}
+      setEditingStudent={setEditingStudent}
+    />
+  </div>
+</div>
   );
 };
 

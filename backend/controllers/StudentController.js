@@ -1,10 +1,9 @@
 const Student = require("../models/Student");
-const upload = require("../middleware/uploadimagemiddleware");
 
 const createStudent = async (req, res) => {
     try {
       const { sid, name, email, age, status } = req.body;
-      const image = req.file ? req.file.path : ""; 
+      const image = req.file ? req.file.path : null; 
       const validStatus = status === "Inactive" ? "Inactive" : "Active";
   
       

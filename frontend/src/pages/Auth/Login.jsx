@@ -2,6 +2,7 @@ import { useState } from "react";
 import { api, setAuthToken } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
+
 const AdminSignin = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -13,9 +14,14 @@ const AdminSignin = () => {
     e.preventDefault();
     try {
       const res = await api.post("/adminauth/adminlogin", formData);
-      localStorage.setItem("token", res.data.token);
-      setAuthToken(res.data.token);
-      navigate("/dashboard");
+      const token = res.data.token;
+
+      const expirationTime = new Date().getTime() + 5 * 60 * 60 * 1000; // 5 hours from now
+    localStorage.setItem("token", token);
+    localStorage.setItem("tokenExpiration", expirationTime);
+    
+    setAuthToken(token);
+    navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }
